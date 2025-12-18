@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ETHICS RACE - Game Etika Profesi</title>
+    <style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 25%, #ffd93d 50%, #6c5ce7 75%, #00b894 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+    overflow-x: hidden;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 100vw;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+}
+
+header {
+    background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 25%, #ffd93d 50%, #6c5ce7 75%, #00b894 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 1.5em;
+    margin-bottom: 2px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+header p {
+    font-size: 0.8em;
+    opacity: 0.95;
+    margin: 0;
+}
+
+.main-content {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow-y: auto;
+    gap: 0;
+}
+
+/* Layar Informasi Awal */
+.info-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 20px;
+}
+
+.info-content {
+    background: white;
+    border-radius: 12px;
+    padding: 25px;
+    max-width: 600px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.info-content h2 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.info-content h3 {
+    color: #34495e;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    font-size: 1.1em;
+}
+
+.info-rules {
+    background: #ecf0f1;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.info-rules p {
+    margin: 8px 0;
+    color: #2c3e50;
+    font-size: 0.95em;
+    line-height: 1.4;
+}
+
+.teams-info {
+    background: #f8f9fa;
+    padding: 12px 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    max-height: 220px;
+    overflow-y: auto;
+}
+
+.team-info-item {
+    margin: 8px 0;
+    padding: 8px;
+    background: white;
+    border-left: 4px solid #667eea;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #2c3e50;
+}
+
+.team-info-item strong {
+    color: #2c3e50;
+}
+
+.btn-start {
+    width: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.btn-start:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-start:active {
+    transform: translateY(0);
+}
+
+.back-button-container {
+    margin-bottom: 10px;
+}
+
+.btn-back {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    font-size: 0.9em;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+}
+
+.btn-back:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(127, 140, 141, 0.3);
+}
+
+.btn-back:active {
+    transform: translateY(0);
+}
+
+/* Panel Pertanyaan */
+.question-panel {
+    background: #f8f9fa;
+    border-left: 5px solid #667eea;
+    padding: 8px 12px;
+    margin-bottom: 6px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    gap: 8px;
+}
+
+.question-number {
+    font-weight: bold;
+    color: #667eea;
+    font-size: 0.8em;
+    white-space: nowrap;
+}
+
+.progress-bar-container {
+    width: 150px;
+    height: 6px;
+    background: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    flex: 1;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    width: 5%;
+    transition: width 0.3s ease;
+}
+
+.question-text {
+    font-size: 1.1em;
+    color: #333;
+    line-height: 1.5;
+    font-weight: 500;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.answer-options {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+.btn-option {
+    background: #e8f4f8;
+    color: #333;
+    border: 2px solid #b3d9e8;
+    text-align: center;
+    padding: 0;
+    font-size: 0.85em;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    font-weight: 500;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.btn-option .option-letter {
+    color: #000;
+    font-size: 2em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    padding-top: 8px;
+}
+
+.btn-option .option-text {
+    flex: 1;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    line-height: 1.3;
+}
+
+.btn-option:hover:not(:disabled) {
+    background: #d1ebf5;
+    border-color: #7ab8d6;
+    transform: translateX(2px);
+}
+
+.btn-option:disabled {
+    cursor: not-allowed;
+}
+
+.next-button-container {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-next {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 10px 20px;
+    font-size: 0.85em;
+}
+
+/* Lintasan Race */
+.race-track {
+    background: #f1f3f5;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    padding: 8px;
+    margin-bottom: 6px;
+    flex: 1;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    position: relative;
+}
+
+.race-container {
+    display: flex;
+    gap: 8px;
+    flex: 1;
+    align-items: stretch;
+    width: 100%;
+}
+
+.track-header {
+    display: none;
+}
+
+.start-line {
+    background: #28a745;
+    border-radius: 4px;
+    width: 8px;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.start-line::before {
+    content: 'START';
+    position: absolute;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-weight: bold;
+    color: white;
+    font-size: 0.6em;
+    white-space: nowrap;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(180deg);
+    letter-spacing: 1px;
+}
+
+.finish-line {
+    background: #dc3545;
+    border-radius: 4px;
+    width: 8px;
+    flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.finish-line::after {
+    content: 'FINISH';
+    position: absolute;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-weight: bold;
+    color: white;
+    font-size: 0.6em;
+    white-space: nowrap;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%) rotate(180deg);
+    letter-spacing: 1px;
+}
+
+.track-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.teams-container {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+}
+
+.team-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 4px 6px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.team-info {
+    min-width: auto;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
+}
+
+.team-icon {
+    font-size: 1.2em;
+}
+
+.team-name {
+    font-weight: bold;
+    color: #333;
+    font-size: 0.7em;
+    display: none;
+}
+
+.team-position {
+    color: #999;
+    font-size: 0.6em;
+    display: none;
+}
+
+.track-grid {
+    display: flex;
+    flex-direction: row;
+    gap: 0;
+    flex: 1;
+    align-items: center;
+    height: 24px;
+    background: linear-gradient(90deg, #e9ecef 1px, transparent 1px) repeat-x;
+    background-size: 26px 24px;
+    background-position: 0 0;
+    position: relative;
+    border-radius: 2px;
+    width: 100%;
+}
+
+.track-cell {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    transition: left 0.5s ease;
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    flex-shrink: 0;
+    left: 0%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.track-cell.finished {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.track-cell.active {
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+.track-cell.empty {
+    background: transparent;
+    border-color: transparent;
+}
+
+/* Panel Kontrol Jawaban */
+.answer-panel {
+    background: #f8f9fa;
+    border: 2px dashed #dee2e6;
+    border-radius: 10px;
+    padding: 8px;
+    text-align: center;
+    flex-shrink: 0;
+    margin-top: 0;
+}
+
+.answer-panel h3 {
+    color: #495057;
+    margin-bottom: 5px;
+    font-size: 0.8em;
+    margin: 0 0 5px 0;
+}
+
+.answer-buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4px;
+}
+
+.btn {
+    padding: 6px 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.75em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.2px;
+}
+
+.btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-answer {
+    color: white !important;
+    font-weight: bold !important;
+}
+
+.btn-answer:hover:not(:disabled) {
+    filter: brightness(0.9);
+}
+
+.btn-primary {
+    background: #28a745;
+    color: white;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background: #218838;
+}
+
+/* Modal Pemenang */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal-content {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    max-width: 500px;
+    width: 100%;
+    overflow: hidden;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.modal-header h2 {
+    font-size: 2em;
+    margin: 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.modal-body {
+    padding: 40px;
+    text-align: center;
+}
+
+.winner-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.winner-icon {
+    font-size: 4em;
+    animation: bounce 0.6s ease infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.winner-info h3 {
+    font-size: 1.8em;
+    color: #333;
+    margin: 0;
+}
+
+.winner-info p {
+    font-size: 1.1em;
+    color: #666;
+    margin: 0;
+}
+
+.modal-footer {
+    padding: 20px;
+    text-align: center;
+    border-top: 1px solid #e9ecef;
+}
+
+.modal-footer .btn {
+    width: 100%;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .main-content {
+        padding: 15px;
+    }
+
+    .question-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .progress-bar-container {
+        width: 100%;
+    }
+
+    .team-row {
+        flex-wrap: wrap;
+    }
+
+    .track-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 6px;
+    }
+
+    .track-cell {
+        font-size: 1.4em;
+    }
+
+    .answer-buttons {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .modal-content {
+        margin: 20px;
+    }
+
+    .modal-body {
+        padding: 30px 20px;
+    }
+
+    .winner-icon {
+        font-size: 3em;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏁 ETHICS RACE 🏁</h1>
+            <p>Game Etika Profesi - 8 Tim Bersaing</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Layar Informasi Awal -->
+            <div class="info-screen" id="infoScreen">
+                <div class="info-content">
+                    <h2>📖 Cara Bermain</h2>
+                    <div class="info-rules">
+                        <p><strong>1. Jawab pertanyaan etika dengan benar</strong> untuk membuat tim Anda maju 1 kotak</p>
+                        <p><strong>2. Jika jawaban salah</strong>, klik tombol "Pertanyaan Berikutnya" untuk melanjutkan</p>
+                        <p><strong>3. Pilih tim Anda</strong> untuk menjawab pertanyaan berikutnya</p>
+                        <p><strong>4. Tim pertama yang mencapai FINISH adalah PEMENANG!</strong></p>
+                    </div>
+
+                    <h3>🐾 Daftar Tim:</h3>
+                    <div class="teams-info">
+                        <div class="team-info-item">🐢 <strong>Tim Kura-Kura</strong> - Lambang kesabaran dan kehati-hatian</div>
+                        <div class="team-info-item">🐇 <strong>Tim Kelinci</strong> - Lambang kecepatan dan ketangkasan</div>
+                        <div class="team-info-item">🐯 <strong>Tim Harimau</strong> - Lambang kekuatan dan kepemimpinan</div>
+                        <div class="team-info-item">🦁 <strong>Tim Singa</strong> - Lambang keberanian dan keyakinan</div>
+                        <div class="team-info-item">🦊 <strong>Tim Rubah</strong> - Lambang kecerdikan dan strategi</div>
+                        <div class="team-info-item">🐼 <strong>Tim Panda</strong> - Lambang keseimbangan dan harmoni</div>
+                        <div class="team-info-item">🐮 <strong>Tim Sapi</strong> - Lambang kerja keras dan dedikasi</div>
+                        <div class="team-info-item">🦅 <strong>Tim Elang</strong> - Lambang visi dan keunggulan</div>
+                    </div>
+
+                    <button class="btn btn-start" onclick="startGame()">▶️ Mulai Permainan</button>
+                </div>
+            </div>
+
+            <!-- Panel Pertanyaan (tersembunyi saat awal) -->
+            <div class="question-panel" id="questionPanel" style="display: none;">
+                <div class="question-header">
+                    <span class="question-number">Pertanyaan <span id="currentQuestionNum">1</span>/20</span>
+                    <span class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </span>
+                </div>
+                <div class="question-text" id="questionText">Memuat pertanyaan...</div>
+                <div class="answer-options" id="answerOptions">
+                    <!-- Opsi jawaban akan di-generate oleh JavaScript -->
+                </div>
+                <div class="next-button-container" id="nextButtonContainer" style="display: none;">
+                    <button class="btn btn-next" onclick="nextQuestion()">Pertanyaan Berikutnya →</button>
+                </div>
+            </div>
+
+            <!-- Lintasan Race (tersembunyi saat awal) -->
+            <div class="race-track" id="raceTrack" style="display: none;">
+                <div class="back-button-container">
+                    <button class="btn btn-back" onclick="backToMenu()">← Kembali</button>
+                </div>
+                <div class="race-container">
+                    <div class="start-line"></div>
+                    <div class="track-content">
+                        <div class="teams-container" id="teamsContainer">
+                            <!-- Tim akan di-generate oleh JavaScript -->
+                        </div>
+                    </div>
+                    <div class="finish-line"></div>
+                </div>
+            </div>
+
+            <!-- Panel Kontrol Jawaban (tersembunyi saat awal) -->
+            <div class="answer-panel" id="answerPanel" style="display: none;">
+                <h3>Pilih Tim yang Berhasil Menjawab Pertanyaan :</h3>
+                <div class="answer-buttons" id="answerButtons">
+                    <!-- Tombol akan di-generate oleh JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal Pemenang -->
+        <div class="modal" id="winnerModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2>🎉 PEMENANG! 🎉</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="winner-info">
+                        <div class="winner-icon" id="winnerIcon"></div>
+                        <h3 id="winnerName"></h3>
+                        <p id="winnerMessage"></p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="location.reload()" class="btn btn-primary">Mainkan Ulang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+// ===== DATA GAME =====
+
+// Array pertanyaan etika IT/Programmer dengan opsi jawaban (20 pertanyaan)
+const questions = [
+    {
+        text: "Anda menemukan bug yang membuat user data bisa diakses siapa saja. Apa langkah pertama Anda?",
+        options: [
+            "Laporkan segera ke tim security",
+            "Tunggu, tidak ada yang peduli",
+            "Jual informasi ke pihak lain",
+            "Biarkan saja, bukan tanggung jawab saya"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Rekan kerja minta Anda copy library gratis tanpa lisensi untuk project. Apa jawaban Anda?",
+        options: [
+            "Tolak, gunakan library berlisensi sah",
+            "Boleh saja, siapa yang tahu",
+            "Boleh tapi sembunyikan dari boss",
+            "Setuju, semua developer melakukannya"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Project deadline seminggu lagi tapi code masih 50% dan penuh bug. Apa yang Anda lakukan?",
+        options: [
+            "Bilang jujur progress tertinggal, negosiasi deadline",
+            "Janji selesai tepat waktu meski tidak mungkin",
+            "Bayar developer lain untuk cepat-cepat",
+            "Copy code dari project lain tanpa izin"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Client minta akses password server untuk monitoring sendiri. Etis tidak?",
+        options: [
+            "Tolak, ajarkan mereka cara aman akses",
+            "Berikan password langsung, mereka yang request",
+            "Berikan password tapi catat ke spreadsheet",
+            "Abaikan request mereka"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Anda lihat admin mengakses data customer tanpa alasan. Harus bagaimana?",
+        options: [
+            "Laporkan ke security team segera",
+            "Tanya admin secara diam-diam saja",
+            "Biarkan, dia senior developer",
+            "Screenshot untuk posting di media sosial"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Manager minta laporan palsu untuk tampil bagus di meeting investor. Apa Anda lakukan?",
+        options: [
+            "Tolak dan buat laporan akurat saja",
+            "Setuju untuk terlihat baik di mata boss",
+            "Lapor palsu tapi catat sendiri data sebenarnya",
+            "Buat laporan yang ambigu agar tidak jelas"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Website company ada XSS vulnerability. Bagaimana cara paling etis melaporkannya?",
+        options: [
+            "Laporkan internal ke IT security dulu",
+            "Post di Twitter untuk mengajar company",
+            "Jual ke bug bounty platform terlebih dulu",
+            "Gunakan vulnerability untuk akses data"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Code dokumentasi sangat jelek, developer baru kesulitan paham. Tanggung jawab siapa?",
+        options: [
+            "Tim yang nulis code harus update dokumentasi",
+            "Biarkan saja, code sudah berbicara",
+            "Tanggungjawab junior developer perbaiki",
+            "Tidak penting, yang penting code jalan"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Anda tahu competitor menggunakan code Anda tanpa izin. Langkah tepat?",
+        options: [
+            "Hubungi lawyer, buat cease & desist",
+            "Balas dendam dengan hacking mereka",
+            "Posting screenshot ke semua sosmed",
+            "Abaikan, semua orang punya code"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Testing menunjukkan feature baru bisa crash untuk user tertentu. Ship atau delay?",
+        options: [
+            "Delay sampai bug benar-benar fixed",
+            "Ship saja, user akan report kalau error",
+            "Ship tapi sembunyikan risk di changelog",
+            "Buat fitur untuk detect dan auto-fix error"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Database berisi data customer sensitif tapi backup-nya tidak diencrypt. Lapor?",
+        options: [
+            "Lapor ASAP ke ops, minta encrypt backup",
+            "Tidak apa, backup disimpan aman di server",
+            "Baru lapor kalau ada insiden security",
+            "Audit tidak perlu terlalu ketat"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "User dengan akses admin melakukan aksi mencurigakan. Apa yang seharusnya dilakukan?",
+        options: [
+            "Monitor & escalate ke security team",
+            "Langsung reset password tanpa tanya",
+            "Biarkan, dia trusted team member",
+            "Private chat untuk tanya secara santai"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Klien minta update aplikasi tapi budget sudah habis. Apa solusi fair?",
+        options: [
+            "Jujur tentang budget, buat proposal untuk fase 2",
+            "Kerjakan gratis untuk portfolio",
+            "Janjikan selesai tapi kerjakan asal-asalan",
+            "Tarik project dan cari klien lain"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Menemukan legacy code yang sangat inefficient tapi masih berjalan. Harus update?",
+        options: [
+            "Dokumentasi risk, buat plan refactor bertahap",
+            "Refactor sekarang juga meski belum urgent",
+            "Biarkan, tidak akan break anyways",
+            "Buat issue tracking tapi tidak follow up"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Anda coding di kafe, laptop bisa dilihat orang. Ada data sensitif di screen. Langkah tepat?",
+        options: [
+            "Tutup screen atau pindah lokasi lebih aman",
+            "Lanjut coding, siapa yang peduli",
+            "Blur screen dengan tangan saja",
+            "Upload code ke cloud biar aman"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Feature baru bisa diskriminasi terhadap user tertentu. Ship atau fix?",
+        options: [
+            "Fix dulu sebelum ship, test dengan diverse user",
+            "Ship saja, user akan adaptif",
+            "Ship tapi catat sebagai known issue",
+            "Abaikan, bukan responsibility kami"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Code review menemukan security hole. Approver bilang 'approve saja, urgent'. Apa Anda?",
+        options: [
+            "Tegak lurus, tolak sampai di-fix",
+            "Approve aja, approver yang tanggung jawab",
+            "Approve tapi catat di logging internal",
+            "Laporkan approver ke manager"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Klien ingin data competitor untuk research. Etis tidak memberikan?",
+        options: [
+            "Tolak keras, itu privacy violation",
+            "Berikan tapi catat sebagai 'internal research'",
+            "Minta izin competitor dulu baru berikan",
+            "Berikan tapi dengan harga premium"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Tim QA menemukan banyak bug tapi boss minta langsung rilis. Langkah Anda?",
+        options: [
+            "Dokumentasi risk, delay rilis sampai aman",
+            "Setujui dan terima responsibility masalahnya",
+            "Rilis tapi pindahkan blame ke QA",
+            "Buat backup plan jika crash terjadi"
+        ],
+        correctAnswer: 0
+    },
+    {
+        text: "Vendor keamanan punya vuln di product mereka, minta Anda jangan publish. Apa?",
+        options: [
+            "Setujui, beri waktu fix, publish setelah fix",
+            "Publish sekarang untuk tekanan fix cepat",
+            "Jual vulnerability ke pihak ketiga",
+            "Biarkan saja, bukan tanggung jawab"
+        ],
+        correctAnswer: 0
+    }
+];
+
+// ===== FUNGSI UTILITY =====
+
+/**
+ * Acak array dengan Fisher-Yates shuffle
+ * @param {Array} array - Array yang akan diacak
+ * @returns {Array} Array yang sudah diacak
+ */
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+/**
+ * Persiapkan pertanyaan dengan mengacak opsi jawaban
+ * @param {Object} question - Objek pertanyaan
+ * @returns {Object} Pertanyaan dengan opsi yang sudah diacak dan jawaban benar yang di-update
+ */
+function prepareQuestion(question) {
+    // Simpan jawaban yang benar
+    const correctOption = question.options[question.correctAnswer];
+    
+    // Buat array dengan index dan value
+    const optionsWithIndex = question.options.map((opt, idx) => ({
+        text: opt,
+        originalIndex: idx
+    }));
+    
+    // Acak opsi
+    const shuffled = shuffleArray(optionsWithIndex);
+    
+    // Cari posisi baru jawaban benar
+    const newCorrectIndex = shuffled.findIndex(opt => opt.originalIndex === question.correctAnswer);
+    
+    return {
+        text: question.text,
+        options: shuffled.map(opt => opt.text),
+        correctAnswer: newCorrectIndex
+    };
+}
+
+// Data tim dengan emoji hewan
+const teams = [
+    { name: "Tim Kura-Kura", icon: "🐢", color: "#a8d5ba", bgColor: "#e8f5e9" },
+    { name: "Tim Kelinci", icon: "🐇", color: "#f9a825", bgColor: "#fff8e1" },
+    { name: "Tim Harimau", icon: "🐯", color: "#ff6b35", bgColor: "#ffe0b2" },
+    { name: "Tim Singa", icon: "🦁", color: "#f4a460", bgColor: "#ffe8d6" },
+    { name: "Tim Rubah", icon: "🦊", color: "#ff6b6b", bgColor: "#ffebee" },
+    { name: "Tim Panda", icon: "🐼", color: "#6f42c1", bgColor: "#f3e5f5" },
+    { name: "Tim Sapi", icon: "🐮", color: "#6c757d", bgColor: "#eceff1" },
+    { name: "Tim Elang", icon: "🦅", color: "#20c997", bgColor: "#e0f2f1" }
+];
+
+const TOTAL_QUESTIONS = 20;
+const TRACK_LENGTH = 5; // Panjang lintasan (5 petak)
+
+// ===== STATE GAME =====
+let gameState = {
+    currentQuestion: 0,
+    positions: [0, 0, 0, 0, 0, 0, 0, 0], // Posisi masing-masing tim (0-5)
+    gameOver: false,
+    winner: null
+};
+
+// ===== FUNGSI INISIALISASI =====
+
+/**
+ * Kembali ke menu cara bermain
+ */
+function backToMenu() {
+    // Reset game state
+    gameState = {
+        currentQuestion: 0,
+        positions: [0, 0, 0, 0, 0, 0, 0, 0],
+        gameOver: false,
+        winner: null
+    };
+    
+    // Sembunyikan elemen game
+    document.getElementById('questionPanel').style.display = 'none';
+    document.getElementById('raceTrack').style.display = 'none';
+    document.getElementById('answerPanel').style.display = 'none';
+    document.getElementById('winnerModal').classList.remove('show');
+    
+    // Tampilkan layar info
+    document.getElementById('infoScreen').style.display = 'flex';
+}
+
+/**
+ * Mulai permainan - sembunyikan layar info dan tampilkan arena bermain
+ */
+function startGame() {
+    try {
+        // Sembunyikan layar informasi
+        const infoScreen = document.getElementById('infoScreen');
+        if (infoScreen) infoScreen.style.display = 'none';
+        
+        // Tampilkan elemen game
+        const questionPanel = document.getElementById('questionPanel');
+        if (questionPanel) questionPanel.style.display = 'block';
+        
+        const raceTrack = document.getElementById('raceTrack');
+        if (raceTrack) raceTrack.style.display = 'block';
+        
+        const answerPanel = document.getElementById('answerPanel');
+        if (answerPanel) answerPanel.style.display = 'block';
+        
+        // Inisialisasi game
+        initGame();
+    } catch (error) {
+        console.error('Error in startGame():', error);
+        alert('Terjadi error saat memulai game. Periksa console untuk detil.');
+    }
+}
+
+/**
+ * Inisialisasi game - jalankan saat halaman pertama kali dimuat
+ */
+function initGame() {
+    renderTrack();
+    renderAnswerButtons();
+    loadQuestion();
+}
+
+/**
+ * Render lintasan dengan grid untuk semua tim
+ */
+function renderTrack() {
+    const container = document.getElementById('teamsContainer');
+    container.innerHTML = '';
+
+    teams.forEach((team, teamIndex) => {
+        const teamRow = document.createElement('div');
+        teamRow.className = 'team-row';
+        teamRow.id = `team-row-${teamIndex}`;
+        teamRow.style.backgroundColor = team.bgColor;
+        teamRow.style.borderLeft = `4px solid ${team.color}`;
+
+        // Info tim
+        const teamInfo = document.createElement('div');
+        teamInfo.className = 'team-info';
+        teamInfo.innerHTML = `
+            <div class="team-icon">${team.icon}</div>
+        `;
+
+        // Grid track
+        const trackGrid = document.createElement('div');
+        trackGrid.className = 'track-grid';
+        trackGrid.id = `track-${teamIndex}`;
+
+        // Hanya satu cell yang akan bergerak sepanjang garis
+        const cell = document.createElement('div');
+        cell.className = 'track-cell active';
+        cell.id = `cell-${teamIndex}-0`;
+        cell.textContent = team.icon;
+        cell.style.left = '0%';
+
+        trackGrid.appendChild(cell);
+
+        teamRow.appendChild(teamInfo);
+        teamRow.appendChild(trackGrid);
+        container.appendChild(teamRow);
+    });
+}
+
+/**
+ * Render tombol jawaban untuk setiap tim
+ */
+function renderAnswerButtons() {
+    const container = document.getElementById('answerButtons');
+    container.innerHTML = '';
+
+    teams.forEach((team, teamIndex) => {
+        const button = document.createElement('button');
+        button.className = 'btn btn-answer';
+        button.textContent = `${team.icon} ${team.name}`;
+        button.style.backgroundColor = team.color;
+        button.style.color = '#fff';
+        button.style.fontWeight = 'bold';
+        button.id = `team-btn-${teamIndex}`;
+        button.style.opacity = '0.5';
+        button.style.cursor = 'not-allowed';
+        button.disabled = true; // Initially disabled
+        button.onclick = () => handleTeamAnswer(teamIndex);
+        container.appendChild(button);
+    });
+}
+
+/**
+ * Handle jawaban tim (ketika tim menjawab benar dan dipilih)
+ * @param {number} teamIndex - Index tim yang menjawab
+ */
+function handleTeamAnswer(teamIndex) {
+    if (gameState.gameOver) return;
+
+    // Tim bergerak maju 1 kotak
+    gameState.positions[teamIndex]++;
+
+    // Update visual track
+    updateTrackVisual(teamIndex);
+
+    // Cek apakah tim ini menang
+    if (gameState.positions[teamIndex] >= TRACK_LENGTH) {
+        endGame(teamIndex, 'finished');
+        return;
+    }
+
+    // Lanjut ke pertanyaan berikutnya
+    gameState.currentQuestion++;
+
+    if (gameState.currentQuestion >= TOTAL_QUESTIONS) {
+        // Semua pertanyaan habis
+        determineWinnerByPosition();
+        return;
+    }
+
+    loadQuestion();
+    disableTeamButtons();
+}
+
+/**
+ * Memuat dan menampilkan pertanyaan saat ini
+ */
+function loadQuestion() {
+    if (gameState.currentQuestion < TOTAL_QUESTIONS) {
+        const originalQuestion = questions[gameState.currentQuestion];
+        // Acak opsi jawaban
+        const currentQ = prepareQuestion(originalQuestion);
+        
+        const questionText = document.getElementById('questionText');
+        questionText.textContent = currentQ.text;
+
+        const questionNum = document.getElementById('currentQuestionNum');
+        questionNum.textContent = gameState.currentQuestion + 1;
+
+        // Update progress bar
+        const progressBar = document.getElementById('progressBar');
+        const progress = ((gameState.currentQuestion + 1) / TOTAL_QUESTIONS) * 100;
+        progressBar.style.width = progress + '%';
+
+        // Render opsi jawaban
+        renderAnswerOptions(currentQ);
+    }
+}
+
+/**
+ * Render opsi jawaban untuk pertanyaan saat ini
+ * @param {Object} question - Objek pertanyaan dengan options
+ */
+function renderAnswerOptions(question) {
+    const container = document.getElementById('answerOptions');
+    container.innerHTML = '';
+
+    const optionLetters = ['A', 'B', 'C', 'D'];
+    
+    question.options.forEach((option, index) => {
+        const optionBtn = document.createElement('button');
+        optionBtn.className = 'btn btn-option';
+        optionBtn.textContent = `${optionLetters[index]}. ${option}`;
+        optionBtn.onclick = () => handleAnswerOption(index, question.correctAnswer);
+        container.appendChild(optionBtn);
+    });
+}
+
+// ===== FUNGSI MEKANISME GAME =====
+
+/**
+ * Handle pemilihan opsi jawaban
+ * @param {number} selectedIndex - Index opsi yang dipilih (0-3)
+ * @param {number} correctIndex - Index opsi yang benar
+ */
+function handleAnswerOption(selectedIndex, correctIndex) {
+    const optionButtons = document.querySelectorAll('.btn-option');
+    
+    // Disable semua tombol option
+    optionButtons.forEach(btn => btn.disabled = true);
+    
+    if (selectedIndex === correctIndex) {
+        // Jawaban benar - highlight dan enable tombol tim
+        optionButtons[selectedIndex].style.backgroundColor = '#28a745';
+        optionButtons[selectedIndex].style.color = 'white';
+        showTeamSelectionDialog();
+    } else {
+        // Jawaban salah - highlight opsi yang salah dan yang benar
+        optionButtons[selectedIndex].style.backgroundColor = '#ff6b6b';
+        optionButtons[selectedIndex].style.color = 'white';
+        optionButtons[correctIndex].style.backgroundColor = '#28a745';
+        optionButtons[correctIndex].style.color = 'white';
+        
+        // Tampilkan tombol NEXT
+        showNextButton();
+    }
+}
+
+/**
+ * Tampilkan tombol NEXT untuk melanjutkan ke pertanyaan berikutnya
+ */
+function showNextButton() {
+    const nextContainer = document.getElementById('nextButtonContainer');
+    nextContainer.style.display = 'flex';
+}
+
+/**
+ * Sembunyikan tombol NEXT
+ */
+function hideNextButton() {
+    const nextContainer = document.getElementById('nextButtonContainer');
+    nextContainer.style.display = 'none';
+}
+
+/**
+ * Lanjut ke pertanyaan berikutnya
+ */
+function nextQuestion() {
+    // Jika sudah pertanyaan terakhir
+    if (gameState.currentQuestion >= TOTAL_QUESTIONS - 1) {
+        determineWinnerByPosition();
+        return;
+    }
+
+    // Lanjut ke pertanyaan berikutnya
+    gameState.currentQuestion++;
+    hideNextButton();
+    disableTeamButtons();
+    loadQuestion();
+}
+
+/**
+ * Tampilkan dialog untuk memilih tim yang menjawab benar
+ */
+function showTeamSelectionDialog() {
+    // Enable semua tombol tim
+    enableTeamButtons();
+    console.log('Tombol tim sudah di-enable, silakan klik tim yang menjawab');
+}
+
+/**
+ * Update visual track untuk tim yang bergerak
+ * @param {number} teamIndex - Index tim
+ */
+function updateTrackVisual(teamIndex) {
+    const position = gameState.positions[teamIndex];
+
+    // Hitung persentase posisi di garis (0-100%)
+    const progressPercent = (position / TRACK_LENGTH) * 100;
+    
+    // Update posisi emoji di garis
+    const cell = document.getElementById(`cell-${teamIndex}-0`);
+    if (cell) {
+        cell.style.left = progressPercent + '%';
+        cell.textContent = teams[teamIndex].icon;
+        
+        // Update class
+        cell.className = 'track-cell';
+        if (position === TRACK_LENGTH) {
+            cell.classList.add('finished');
+        } else {
+            cell.classList.add('active');
+        }
+    }
+}
+
+/**
+ * Tentukan pemenang berdasarkan posisi terjauh
+ * Jika ada tie, lakukan rock-paper-scissors otomatis
+ */
+function determineWinnerByPosition() {
+    const maxPosition = Math.max(...gameState.positions);
+    const winnersIndex = gameState.positions
+        .map((pos, idx) => pos === maxPosition ? idx : -1)
+        .filter(idx => idx !== -1);
+
+    if (winnersIndex.length === 1) {
+        // Satu pemenang jelas
+        endGame(winnersIndex[0], 'position');
+    } else {
+        // Ada tie - lakukan rock-paper-scissors otomatis
+        performTiebreak(winnersIndex);
+    }
+}
+
+/**
+ * Lakukan tiebreak dengan rock-paper-scissors otomatis
+ * @param {Array} teamIndices - Array index tim yang tied
+ */
+function performTiebreak(teamIndices) {
+    console.log('Tiebreak dimulai antara:', teamIndices.map(i => teams[i].name));
+
+    let winner = teamIndices[0];
+
+    for (let i = 1; i < teamIndices.length; i++) {
+        winner = playRockPaperScissors(winner, teamIndices[i]);
+    }
+
+    endGame(winner, 'tiebreak');
+}
+
+/**
+ * Main rock-paper-scissors logic
+ * Menentukan pemenang antara dua tim dengan random choice
+ * @param {number} teamA - Index tim A
+ * @param {number} teamB - Index tim B
+ * @returns {number} Index tim pemenang
+ */
+function playRockPaperScissors(teamA, teamB) {
+    const choices = ['rock', 'paper', 'scissors'];
+    const choiceA = choices[Math.floor(Math.random() * 3)];
+    const choiceB = choices[Math.floor(Math.random() * 3)];
+
+    console.log(`${teams[teamA].name} pilih: ${choiceA}`);
+    console.log(`${teams[teamB].name} pilih: ${choiceB}`);
+
+    // Rock > Scissors > Paper > Rock
+    if (choiceA === choiceB) {
+        // Tie - repeat
+        return playRockPaperScissors(teamA, teamB);
+    } else if (
+        (choiceA === 'rock' && choiceB === 'scissors') ||
+        (choiceA === 'scissors' && choiceB === 'paper') ||
+        (choiceA === 'paper' && choiceB === 'rock')
+    ) {
+        return teamA;
+    } else {
+        return teamB;
+    }
+}
+
+/**
+ * Akhiri game dan tampilkan pemenang
+ * @param {number} winnerIndex - Index tim pemenang
+ * @param {string} reason - Alasan kemenangan: 'finished', 'position', atau 'tiebreak'
+ */
+function endGame(winnerIndex, reason) {
+    gameState.gameOver = true;
+    gameState.winner = winnerIndex;
+
+    const winner = teams[winnerIndex];
+    const modal = document.getElementById('winnerModal');
+    const modalHeader = modal.querySelector('.modal-header h2');
+    const winnerNameElement = document.getElementById('winnerName');
+
+    // Tentukan pesan berdasarkan alasan kemenangan dan update header
+    let message = '';
+    let headerText = '';
+    let iconEmoji = '';
+    let displayName = '';
+    
+    switch (reason) {
+        case 'finished':
+            headerText = '🎉 PEMENANG! 🎉';
+            iconEmoji = winner.icon;
+            displayName = winner.name;
+            message = 'Berhasil mencapai garis finish pertama!';
+            winnerNameElement.style.display = 'block';
+            break;
+        case 'position':
+            headerText = '🎉 PEMENANG! 🎉';
+            iconEmoji = winner.icon;
+            displayName = winner.name;
+            message = `Posisi terjauh (${gameState.positions[winnerIndex]}/5 kotak)`;
+            winnerNameElement.style.display = 'block';
+            break;
+        case 'tiebreak':
+            headerText = '⚖️ TIEBREAKER ⚖️';
+            iconEmoji = '🤝';
+            displayName = 'Bersiap untuk Adu Suit!';
+            message = 'Tim-tim dengan posisi seri akan melakukan Rock-Paper-Scissors untuk menentukan pemenang!';
+            winnerNameElement.style.display = 'block';
+            break;
+    }
+
+    // Update modal header text
+    modalHeader.textContent = headerText;
+
+    // Update modal content
+    document.getElementById('winnerIcon').textContent = iconEmoji;
+    document.getElementById('winnerName').textContent = displayName;
+    document.getElementById('winnerMessage').textContent = message;
+
+    // Tampilkan modal
+    modal.classList.add('show');
+
+    // Disable tombol (visual hanya, bukan disabled attribute)
+    document.querySelectorAll('.btn-answer').forEach(btn => {
+        btn.style.opacity = '0.6';
+        btn.style.cursor = 'not-allowed';
+    });
+}
+
+/**
+ * Disable semua tombol tim
+ */
+function disableTeamButtons() {
+    document.querySelectorAll('.btn-answer').forEach(btn => {
+        btn.disabled = true;
+        btn.style.opacity = '0.5';
+        btn.style.cursor = 'not-allowed';
+    });
+}
+
+/**
+ * Enable semua tombol tim
+ */
+function enableTeamButtons() {
+    document.querySelectorAll('.btn-answer').forEach(btn => {
+        btn.disabled = false;
+        btn.style.opacity = '1';
+        btn.style.cursor = 'pointer';
+    });
+}
+
+// ===== INISIALISASI HALAMAN =====
+// Game dimulai setelah user klik tombol "Mulai Permainan" di layar info
+// Layar info sudah ditampilkan secara default di HTML
+    </script>
+</body>
+</html>
